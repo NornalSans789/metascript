@@ -456,13 +456,19 @@ local Tab5 = Window:MakeTab({
 })
 
 local Section5 = Tab5:AddSection({
-        Name = "Script Owner And Helpers"
+        Name = "Script Owner"
+})
+
+Tab5:AddLabel("By MetaHub789")
+
+local Section6 = Tab5:AddSection({
+        Name = "Script Helpers"
 })
 
 Tab5:AddLabel("By SansYT789")
 Tab5:AddLabel("By RoyRedRedVN")
 
-local Section6 = Tab5:AddSection({
+local Section7 = Tab5:AddSection({
         Name = "Other"
 })
 
@@ -607,6 +613,7 @@ local CreditSection = CreditTab:AddSection({
         Name = "Script Helpers"
 })
 
+CreditTab:AddLabel("By SansYT789")
 CreditTab:AddLabel("By RoyRedRedVN")
 
 CreditTab:AddButton({
