@@ -1,6 +1,6 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))() -- This Will Load The Script Code
 
-Gui_Version = "1.0.6"
+Gui_Version = "1.1.0"
 
 -- Local
 local Player = game.Players.LocalPlayer --This Will Reveal The Player Name
@@ -9,23 +9,75 @@ local loadedKey = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nor
 getgenv().KeyInput = "string" -- Require For The Key To Work
 
 -- function
+function ConfigLoaded()
+
+OrionLib:MakeNotification({
+        Name = "Configuration Loaded!",
+        Content = "Loaded the config key you previously entered",
+        Image = "rbxassetid://4483345998",
+        Time = 2.5
+})
+end
+
+function NotifyStartHub()
+
+wait(.5)
+MakeScriptHub()
+OrionLib:MakeNotification({
+        Name = "Welcome to script:)",
+        Content = "Please enjoy my script, my friends:)",
+        Image = "rbxassetid://4483345998",
+        Time = 3
+})
+wait(1)
+OrionLib:MakeNotification({
+        Name = "Script Has Updated!",
+        Content = "Enjoy my script now",
+        Image = "rbxassetid://4483345998",
+        Time = 2.5
+})
+end
+
+
 function MakeScriptHub() 
 
-local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptHub_Config", IntroText = "Loading Hub..."})
+local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MetaScriptHub_Config", IntroText = "Loading Hub..."})
 
-local Tab = Window:MakeTab({
+-- About Tab
+local AboutTab = Window:MakeTab({
+        Name = "About",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+})
+
+local AboutSection = AboutTab:AddSection({
+        Name = "About Section"
+})
+
+AboutTab:AddLabel("Version: "..Gui_Version)
+
+local ChangelogSection = AboutTab:AddSection({
+        Name = "Changelogs Section"
+})
+
+AboutTab:AddLabel("[+] Added new Tab About for script")
+AboutTab:AddLabel("[+] Added changelogs (Tab About), you can see the changelog of this script!!!")
+AboutTab:AddLabel("[+] Edited the notification bar to make it more reasonable")
+
+-- Main Tab
+local MainTab = Window:MakeTab({
         Name = "Main",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
 })
 
-local Section = Tab:AddSection({
+local MainSection = MainTab:AddSection({
         Name = "Main Player Section"
 })
 
-Tab:AddLabel("For Slider")
+MainTab:AddLabel("For Slider")
 
-Tab:AddSlider({
+MainTab:AddSlider({
         Name = "WalkSpeed",
         Min = 16,
         Max = 1000,
@@ -39,7 +91,7 @@ Tab:AddSlider({
         end    
 })
 
-Tab:AddSlider({
+MainTab:AddSlider({
         Name = "Jump Height",
         Min = 50,
         Max = 2000,
@@ -53,7 +105,7 @@ Tab:AddSlider({
         end    
 })
 
-Tab:AddSlider({
+MainTab:AddSlider({
         Name = "Gravity",
         Min = 155,
         Max = 3000,
@@ -67,9 +119,9 @@ Tab:AddSlider({
         end    
 })
 
-Tab:AddLabel("For Input")
+MainTab:AddLabel("For Input")
 
-Tab:AddTextbox({
+MainTab:AddTextbox({
         Name = "WalkSpeed (Default = 16)",
         Default = "",
         TextDisappear = true,
@@ -79,7 +131,7 @@ Tab:AddTextbox({
         end          
 })
 
-Tab:AddTextbox({
+MainTab:AddTextbox({
         Name = "Jump Height (Default = 50)",
         Default = "",
         TextDisappear = true,
@@ -89,7 +141,7 @@ Tab:AddTextbox({
         end          
 })
 
-Tab:AddTextbox({
+MainTab:AddTextbox({
         Name = "Gravity (Default = 155)",
         Default = "",
         TextDisappear = true,
@@ -99,9 +151,9 @@ Tab:AddTextbox({
         end          
 })
 
-Tab:AddLabel("For Button Reset")
+MainTab:AddLabel("For Button Reset")
 
-Tab:AddButton({
+MainTab:AddButton({
         Name = "Reset WalkSpeed",
         Callback = function()
 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
@@ -109,7 +161,7 @@ game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
           end    
 })
 
-Tab:AddButton({
+MainTab:AddButton({
         Name = "Reset Jump Height",
         Callback = function()
 game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
@@ -117,7 +169,7 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
           end    
 })
 
-Tab:AddButton({
+MainTab:AddButton({
         Name = "Reset Gravity",
         Callback = function()
 game.Workspace.Gravity = 155
@@ -125,10 +177,11 @@ game.Workspace.Gravity = 155
           end    
 })
 
-local Section = Tab:AddSection({
+local MainSection1 = MainTab:AddSection({
         Name = "Script Main Section"
 })
-Tab:AddButton({
+
+MainTab:AddButton({
         Name = "Fly Gui",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
@@ -136,7 +189,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/
           end    
 })
 
-Tab:AddButton({
+MainTab:AddButton({
         Name = "Fe Perm ShiftLock",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/MiniNoobie/ShiftLockx/main/Shiftlock-MiniNoobie",true))()
@@ -144,7 +197,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/MiniNoobie/ShiftLockx
           end    
 })
 
-Tab:AddButton({
+MainTab:AddButton({
         Name = "Inf Field",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
@@ -152,7 +205,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/
           end    
 })
 
-Tab:AddButton({
+MainTab:AddButton({
         Name = "Keyboard",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
@@ -160,7 +213,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifv
           end    
 })
 
-Tab:AddButton({
+MainTab:AddButton({
         Name = "Fps Booster",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/FPSBooster.lua"))()
@@ -168,18 +221,18 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord
           end    
 })
 
--- Tab1
-local Tab1 = Window:MakeTab({
+-- Fe Tab
+local FeTab = Window:MakeTab({
         Name = "Fe Script",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
 })
 
-local Section1 = Tab1:AddSection({
+local FeSection = FeTab:AddSection({
         Name = "Fe Script Hub Section"
 })
 
-Tab1:AddButton({
+FeTab:AddButton({
         Name = "Nameless Admin",
         Callback = function()
 loadstring(game:HttpGet('https://gist.github.com/inuk84/ca841931f45f242c945405298b26bd71/raw/af364e5d4ea5b0d2eac404a5376d83c84a23cbe4/na.lua'))()
@@ -187,7 +240,7 @@ loadstring(game:HttpGet('https://gist.github.com/inuk84/ca841931f45f242c94540529
           end    
 })
 
-Tab1:AddButton({
+FeTab:AddButton({
         Name = "Fe Chat Bypasser",
         Callback = function()
 loadstring(game:HttpGet(('https://pastebin.com/raw/SXCWfrrR'),true))()
@@ -195,7 +248,7 @@ loadstring(game:HttpGet(('https://pastebin.com/raw/SXCWfrrR'),true))()
           end    
 })
 
-Tab1:AddButton({
+FeTab:AddButton({
         Name = "Fe R15 To R6",
         Callback = function()
 loadstring(game:HttpGet(('https://raw.githubusercontent.com/Imagnir/r6_anims_for_r15/main/r6_anims.lua'),true))()
@@ -203,7 +256,7 @@ loadstring(game:HttpGet(('https://raw.githubusercontent.com/Imagnir/r6_anims_for
           end    
 })
 
-Tab1:AddButton({
+FeTab:AddButton({
         Name = "Fe AntiFall (All Obby)",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
@@ -211,7 +264,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/
           end    
 })
 
-Tab1:AddButton({
+FeTab:AddButton({
         Name = "Super Fling Gui",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%20GUI"))()
@@ -219,18 +272,18 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%
           end    
 })
 
--- Tab2
-local Tab2 = Window:MakeTab({
+-- Script Tab
+local ScriptTab = Window:MakeTab({
         Name = "Script Hub",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
 })
 
-local Section2 = Tab2:AddSection({
+local ScriptSection = ScriptTab:AddSection({
         Name = "Script Hub Section"
 })
 
-Tab2:AddButton({
+ScriptTab:AddButton({
         Name = "Monday Morning Misery",
         Callback = function()
 loadstring(game:HttpGet("https://stavratum.github.io/" .. game.PlaceId))()
@@ -238,7 +291,7 @@ loadstring(game:HttpGet("https://stavratum.github.io/" .. game.PlaceId))()
           end    
 })
 
-Tab2:AddButton({
+ScriptTab:AddButton({
 	Name = "Hide And Seek",
 	Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Hide%20And%20Seek%20Extreme'))()
@@ -246,7 +299,7 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/
   	end    
 })
 
-Tab2:AddButton({
+ScriptTab:AddButton({
 	Name = "Doors (Blacking And Bob Hub)",
 	Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-obf/main/Doors%20Blackking%20And%20BobHub"))()
@@ -254,7 +307,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-o
   	end    
 })
 
-Tab2:AddButton({
+ScriptTab:AddButton({
         Name = "Pls Donate",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/tzechco/roblox-scripts/main/PLS%20DONATE/autofarm.lua'))()
@@ -262,7 +315,7 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/tzechco/roblox-script
           end    
 })
 
-Tab2:AddButton({
+ScriptTab:AddButton({
         Name = "Bathroom Battle",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0BathroomBattle'))()
@@ -270,7 +323,7 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/mai
           end    
 })
 
-Tab2:AddButton({
+ScriptTab:AddButton({
         Name = "Super Toilet Brawl (Beta)",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/SmalerHub/SmalerHub/main/The%20Best%20/Super%20Toilet%20Brawl%20/Script%20/Main%20App%20/For%20Smaler%20Hub"))()
@@ -278,18 +331,18 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/SmalerHub/SmalerHub/m
           end    
 })
 
--- Tab3
-local Tab3 = Window:MakeTab({
+-- BBTab
+local BBTab = Window:MakeTab({
         Name = "Blade Ball Script",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
 })
 
-local Section3 = Tab3:AddSection({
+local BBSection = BBTab:AddSection({
         Name = "Script Section"
 })
 
-Tab3:AddButton({
+BBTab:AddButton({
         Name = "Bedol Hub",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/nqxlOfc/Loaders/main/Blade_Ball.lua'))()
@@ -297,7 +350,7 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/nqxlOfc/Loaders/main/
           end    
 })
 
-Tab3:AddButton({
+BBTab:AddButton({
         Name = "REDz Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BladeBall/main/eng"))()
@@ -305,7 +358,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BladeBall/mai
           end    
 })
 
-Tab3:AddButton({
+BBTab:AddButton({
 	Name = "Raven B4 Hub",
 	Callback = function()
 loadstring(game:HttpGet("https://pastebin.com/raw/DzAdmNq1"))()
@@ -313,7 +366,7 @@ loadstring(game:HttpGet("https://pastebin.com/raw/DzAdmNq1"))()
   	end    
 })
 
-Tab3:AddButton({
+BBTab:AddButton({
 	Name = "Sirius Hub",
 	Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xdevslasher/Siriusisbetter/main/xyz.bb.lua",true))()
@@ -321,7 +374,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xdevslasher/Siriusisb
   	end    
 })
 
-Tab3:AddButton({
+BBTab:AddButton({
         Name = "Nexus Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/s-o-a-b/nexus/main/loadstring"))()
@@ -329,7 +382,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/s-o-a-b/nexus/main/lo
           end    
 })
 
-Tab3:AddButton({
+BBTab:AddButton({
         Name = "Auto Parry V4 (No Menu)",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3ABlade%20Ball%20Parry%20V4.0.0",true))()
@@ -337,7 +390,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/ma
           end    
 })
 
-Tab3:AddButton({
+BBTab:AddButton({
         Name = "Manual Spam",
         Callback = function()
 loadstring(game:HttpGet('https://pastebin.com/raw/KB4xQe4j'))()
@@ -345,18 +398,18 @@ loadstring(game:HttpGet('https://pastebin.com/raw/KB4xQe4j'))()
           end    
 })
 
--- Tab4
-local Tab4 = Window:MakeTab({
+-- Blox Fruit Tab
+local BFTab = Window:MakeTab({
         Name = "Blox Fruit Script",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
 })
 
-local Section4 = Tab4:AddSection({
+local BFSection = BFTab:AddSection({
         Name = "Script Section"
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
         Name = "REDz Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/main/redz9999"))()
@@ -364,9 +417,9 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/ma
           end    
 })
 
-Tab4:AddParagraph("Note (HoHo Hub):","If you cannot turn off the auto hop server, click on "Hoho Reset Config" to get the hoho hub config reset script.")
+BFTab:AddParagraph("Note (Hoho Hub):","If you cannot turn off the auto hop server, click on "Hoho Reset Config" to get the hoho hub config reset script.")
 
-Tab4:AddButton({
+BFTab:AddButton({
 	Name = "Hoho Hub V3 (Need Key)",
 	Callback = function()
 _G.HohoVersion = "v3" 
@@ -375,14 +428,14 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/L
   	end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
 	Name = "Hoho Reset Config",
 	Callback = function()
                  setclipboard("delfolder("HoHo_Hub_gen3")")
   	end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
         Name = "Master Hub (Vietnam)",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/onepicesenpai/onepicesenpai/main/onichanokaka'))()
@@ -390,7 +443,7 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/onepicesenpai/onepice
           end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
         Name = "MTriet Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
@@ -398,7 +451,15 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Scri
           end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
+        Name = "Satoru Hub",
+        Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/SatoruHub/Main-Script/main/Satoru-Hub"))()
+                      print("Script Active!")
+          end    
+})
+
+BFTab:AddButton({
         Name = "Fai Fao Hub V2",
         Callback = function()
 loadstring(game:HttpGet"https://raw.githubusercontent.com/PNguyen0199/Script/main/Fai-Fao-Ver2.lua")()
@@ -406,7 +467,7 @@ loadstring(game:HttpGet"https://raw.githubusercontent.com/PNguyen0199/Script/mai
           end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
         Name = "Domadic Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Domadicoof/Domadicoof/main/Domadichub/NottoGay/Start.ranscript"))()
@@ -414,7 +475,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Domadicoof/Domadicoof
           end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
         Name = "Annie Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Anniecuti/Free-Scr/main/Annie-Hub.lua"))()
@@ -422,7 +483,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Anniecuti/Free-Scr/ma
           end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
         Name = "Vector Hub (English)",
         Callback = function()
 _G.Mode = "English" -- "English" & " Vietnam"
@@ -431,7 +492,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Tuxoz/VectorHub/main/
           end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
         Name = "Vector Hub (VietNam)",
         Callback = function()
 _G.Mode = "Vietnam" -- "English" & " Vietnam"
@@ -440,7 +501,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Tuxoz/VectorHub/main/
           end    
 })
 
-Tab4:AddButton({
+BFTab:AddButton({
         Name = "Sonic Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NickelHUBB/SonicTuru/main/Protected-25.lua"))()
@@ -448,38 +509,38 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/NickelHUBB/SonicTuru/
           end    
 })
 
--- Tab5
-local Tab5 = Window:MakeTab({
+-- Credit Tab
+local CreditTab = Window:MakeTab({
         Name = "Credit",
         Icon = "rbxassetid://4483345998",
         PremiumOnly = false
 })
 
-local Section5 = Tab5:AddSection({
+local CreditSection = CreditTab:AddSection({
         Name = "Script Owner"
 })
 
-Tab5:AddLabel("By MetaHub789")
+CreditTab:AddLabel("By MetaHub789(Youtube)")
 
-local Section6 = Tab5:AddSection({
+local CreditSection1 = CreditTab:AddSection({
         Name = "Script Helpers"
 })
 
-Tab5:AddLabel("By SansYT789")
-Tab5:AddLabel("By RoyRedRedVN")
+CreditTab:AddLabel("By SansYT789(Youtube)")
+CreditTab:AddLabel("By RoyRedRedVN(Youtube)")
 
-local Section7 = Tab5:AddSection({
+local OtherSection = CreditTab:AddSection({
         Name = "Other"
 })
 
-Tab5:AddButton({
+CreditTab:AddButton({
    Name = "Rejoin",
    Callback = function()
    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
      end
 })
 
-Tab5:AddButton({
+CreditTab:AddButton({
    Name = "Server Hop",
    Callback = function()
    local module = loadstring(game:HttpGet("loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/metascript/main/serverhop"))()"))() 
@@ -487,7 +548,7 @@ Tab5:AddButton({
      end
 })
 
-Tab5:AddButton({
+CreditTab:AddButton({
    Name = "Server Small",
    Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/metascript/main/serversmall"))()
@@ -495,7 +556,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/metascr
       end
 })
 
-Tab5:AddButton({
+CreditTab:AddButton({
         Name = "Copy Discord",
         Callback = function()
                       setclipboard("https://discord.gg/KKtc8PTKkz")
@@ -503,16 +564,9 @@ Tab5:AddButton({
         Name = "MetaScript Hub",
         Content = "The link has been copied",
         Image = "rbxassetid://4483345998",
-        Time = 5
+        Time = 4
 })
           end    
-})
-
-OrionLib:MakeNotification({
-        Name = "Welcome to script:)",
-        Content = "Please enjoy my script, my friends:)",
-        Image = "rbxassetid://4483345998",
-        Time = 5
 })
 end
 
@@ -522,26 +576,22 @@ OrionLib:MakeNotification({
     Name = "Checking Key", 
     Content = "Checking The Key You Entered", 
     Image = "rbxassetid://4483345998", 
-    Time = 5 
+    Time = 3 
 })
 end
 
 
 function readKey()
      if readfile("/MetaScriptKey/key.txt") == loadedKey then
-                  MakeScriptHub()
-                  OrionLib:MakeNotification({
-        Name = "Configuration Loaded!",
-        Content = "Loaded the config key you previously entered",
-        Image = "rbxassetid://4483345998",
-        Time = 5
-})
+                  ConfigLoaded()
+                  wait(1)
+                  NotifyStartHub()
           else
                   OrionLib:MakeNotification({
         Name = "Logged In!",
         Content = "You need key "..Player.Name..".",
         Image = "rbxassetid://4483345998",
-        Time = 5
+        Time = 3.5
 })
                   local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptKey", IntroText = "Loading Hub..."}) 
                   local KeyTab = Window:MakeTab({
@@ -553,7 +603,7 @@ function readKey()
 KeyTab:AddTextbox({
         Name = "Key",
         Default = "",
-        TextDisappear = true,
+        TextDisappear = false,
         Callback = function(Value)
             getgenv().KeyInput = Value
         end          
@@ -569,13 +619,13 @@ KeyTab:AddButton({
                 Name = "Correct Key!", 
                 Content = "The key you entered is Correct.", 
                 Image = "rbxassetid://4483345998", 
-                Time = 5 
+                Time = 2 
             }) 
             wait(1) 
             OrionLib:Destroy() 
             wait(.2) 
             writefile("/MetaScriptKey/key.txt", loadedKey)
-            MakeScriptHub() 
+            NotifyStartHub()
        else 
            CheckKeyNotify()
            wait(2) 
@@ -583,7 +633,7 @@ KeyTab:AddButton({
                Name = "Incorrect Key!", 
                Content = "The key you entered is incorrect.", 
                Image = "rbxassetid://4483345998", 
-               Time = 5 
+               Time = 3.5 
            }) 
        end
           end    
@@ -597,7 +647,7 @@ KeyTab:AddButton({
         Name = "Key System",
         Content = "The key link has been copied",
         Image = "rbxassetid://4483345998",
-        Time = 5
+        Time = 3.5
 })
           end    
 })
@@ -613,8 +663,8 @@ local CreditSection = CreditTab:AddSection({
         Name = "Script Helpers"
 })
 
-CreditTab:AddLabel("By SansYT789")
-CreditTab:AddLabel("By RoyRedRedVN")
+CreditTab:AddLabel("By SansYT789(Youtube)")
+CreditTab:AddLabel("By RoyRedRedVN(Youtube)")
 
 CreditTab:AddButton({
         Name = "Copy Discord",
@@ -624,7 +674,7 @@ CreditTab:AddButton({
         Name = "MetaScript Hub",
         Content = "The link has been copied",
         Image = "rbxassetid://4483345998",
-        Time = 5
+        Time = 3
 })
           end    
 })
