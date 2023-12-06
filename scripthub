@@ -1,4 +1,4 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))() -- This Will Load The Script Code
+local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))() -- This Will Load The Script Code
 
 Gui_Version = "1.1.0"
 
@@ -41,7 +41,7 @@ end
 
 function MakeScriptHub() 
 
-local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MetaScriptHub_Config", IntroText = "Loading Hub..."})
+local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptHub_Config", IntroText = "Loading Hub..."})
 
 -- About Tab
 local AboutTab = Window:MakeTab({
@@ -71,7 +71,7 @@ local MainTab = Window:MakeTab({
         PremiumOnly = false
 })
 
-local MainSection = MainTab:AddSection({
+local MainPlayerSection = MainTab:AddSection({
         Name = "Main Player Section"
 })
 
@@ -177,7 +177,7 @@ game.Workspace.Gravity = 155
           end    
 })
 
-local MainSection1 = MainTab:AddSection({
+local MainScriptSection = MainTab:AddSection({
         Name = "Script Main Section"
 })
 
@@ -417,7 +417,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/ma
           end    
 })
 
-BFTab:AddParagraph("Note (Hoho Hub):","If you cannot turn off the auto hop server, click on "Hoho Reset Config" to get the hoho hub config reset script.")
+BFTab:AddParagraph("Note (Hoho Hub):","If you cannot turn off the auto hop server, click on 'Hoho Reset Config' to get the hoho hub config reset script.")
 
 BFTab:AddButton({
 	Name = "Hoho Hub V3 (Need Key)",
