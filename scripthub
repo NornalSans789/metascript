@@ -1,12 +1,10 @@
--- Local
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source'))()
 local Player = game.Players.LocalPlayer
 local loadedKey = loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/key/main/skibidikey"))()
-local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
 getgenv().KeyInput = "string"
 
-Gui_Version = "1.1.0"
+Gui_Version = "1.1.1"
 
--- function
 function ConfigLoaded()
 OrionLib:MakeNotification({
         Name = "Configuration Loaded!",
@@ -14,10 +12,10 @@ OrionLib:MakeNotification({
         Image = "rbxassetid://4483345998",
         Time = 3
 })
+NotifyStartHub()
 end
 
 function NotifyStartHub()
-wait(.5)
 MakeScriptHub()
 OrionLib:MakeNotification({
         Name = "Welcome to script:)",
@@ -29,7 +27,6 @@ ngudot()
 end
 
 function ngudot()
-wait(1)
 OrionLib:MakeNotification({
         Name = "Script Has Updated!",
         Content = "Enjoy my script now!!!!!",
@@ -41,7 +38,6 @@ end
 function MakeScriptHub()
 local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptHub_Config", IntroText = "Loading Hub..."})
 
--- About Tab
 local AboutTab = Window:MakeTab({
         Name = "About",
         Icon = "rbxassetid://4483345998",
@@ -61,8 +57,8 @@ local ChangelogSection = AboutTab:AddSection({
 AboutTab:AddLabel("[+] Added new Tab About for script")
 AboutTab:AddLabel("[+] Added changelogs, you can see the changelog of this script!!!")
 AboutTab:AddLabel("[+] Edited the notification bar to make it more reasonable")
+AboutTab:AddLabel("[+] Fixed the 'attempt to call a nil value' error in the console to show the gui (the error has been present since the new fluxus update)")
 
--- Main Tab
 local MainTab = Window:MakeTab({
         Name = "Main",
         Icon = "rbxassetid://4483345998",
@@ -175,6 +171,18 @@ game.Workspace.Gravity = 155
           end    
 })
 
+MainTab:AddButton({
+        Name = "Inf Jump (Forever)",
+        Callback = function()
+local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+    if InfiniteJumpEnabled then
+        game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+    end
+end)
+          end    
+})
+
 local MainScriptSection = MainTab:AddSection({
         Name = "Script Main Section"
 })
@@ -219,7 +227,18 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord
           end    
 })
 
--- Fe Tab
+local MainColorPickerSection = MainTab:AddSection({
+        Name = "Color Picker Main Section"
+})
+
+MainTab:AddColorpicker({
+	Name = "Colorpicker",
+	Default = Color3.fromRGB(255, 0, 0),
+	Callback = function(Value)
+		print(Value)
+	end	  
+})
+
 local FeTab = Window:MakeTab({
         Name = "Fe Script",
         Icon = "rbxassetid://4483345998",
@@ -270,7 +289,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe./main/Fling%
           end    
 })
 
--- Script Tab
 local ScriptTab = Window:MakeTab({
         Name = "Script Hub",
         Icon = "rbxassetid://4483345998",
@@ -314,6 +332,14 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/tzechco/roblox-script
 })
 
 ScriptTab:AddButton({
+        Name = "Pet Simulator 99",
+        Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/PetSimulator99/main/redz9999.lua"))()
+                      print("Script Active!")
+          end    
+})
+
+ScriptTab:AddButton({
         Name = "Bathroom Battle",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0BathroomBattle'))()
@@ -329,7 +355,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/SmalerHub/SmalerHub/m
           end    
 })
 
--- BBTab
 local BBTab = Window:MakeTab({
         Name = "Blade Ball Script",
         Icon = "rbxassetid://4483345998",
@@ -381,6 +406,16 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/s-o-a-b/nexus/main/lo
 })
 
 BBTab:AddButton({
+        Name = "Auto Parry (Detect Spam And No Menu)",
+        Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Parry/main/Real"))()
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Spam-Parry/main/Bladeballnew"))()
+                      print("Script Active!")
+          end    
+})
+
+BBTab:AddButton({
         Name = "Auto Parry V4 (No Menu)",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3ABlade%20Ball%20Parry%20V4.0.0",true))()
@@ -396,7 +431,14 @@ loadstring(game:HttpGet('https://pastebin.com/raw/KB4xQe4j'))()
           end    
 })
 
--- Blox Fruit Tab
+BBTab:AddButton({
+        Name = "Hold Block To Spam",
+        Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/main/MC%3ABlade%20Ball%20Spam",true))()
+                      print("Script Active!")
+          end    
+})
+
 local BFTab = Window:MakeTab({
         Name = "Blox Fruit Script",
         Icon = "rbxassetid://4483345998",
@@ -415,21 +457,12 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/ma
           end    
 })
 
-BFTab:AddParagraph("Note (Hoho Hub):","If you cannot turn off the auto hop server, click on 'Hoho Reset Config' to get the hoho hub config reset script.")
-
 BFTab:AddButton({
 	Name = "Hoho Hub V3 (Need Key)",
 	Callback = function()
 _G.HohoVersion = "v3" 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
               		print("Script Active!")
-  	end    
-})
-
-BFTab:AddButton({
-	Name = "Hoho Reset Config",
-	Callback = function()
-                 setclipboard("delfolder("HoHo_Hub_gen3")")
   	end    
 })
 
@@ -507,7 +540,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/NickelHUBB/SonicTuru/
           end    
 })
 
--- Credit Tab
 local CreditTab = Window:MakeTab({
         Name = "Credit",
         Icon = "rbxassetid://4483345998",
@@ -589,8 +621,6 @@ end
 function readKey()
      if readfile("/MetaScriptKey/key.txt") == loadedKey then
                   ConfigLoaded()
-                  wait(1)
-                  NotifyStartHub()
           else
                   ngulon()
                   local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptKey", IntroText = "Key System..."}) 
@@ -651,7 +681,7 @@ KeyTab:AddButton({
 })
           end    
 })
-KeyTab:AddParagraph("Note:","This "Copy Key" button will copy our discord because in our discord there is a key")
+KeyTab:AddParagraph("Note:","This 'Copy Key' button will copy our discord because in our discord there is a key")
 
 local CreditTab = Window:MakeTab({
         Name = "Credit",
