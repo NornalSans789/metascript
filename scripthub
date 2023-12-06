@@ -1,26 +1,22 @@
-local OrionLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Orion/main/source"))() -- This Will Load The Script Code
+-- Local
+local Player = game.Players.LocalPlayer
+local loadedKey = loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/key/main/skibidikey"))()
+local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
+getgenv().KeyInput = "string"
 
 Gui_Version = "1.1.0"
 
--- Local
-local Player = game.Players.LocalPlayer --This Will Reveal The Player Name
-
-local loadedKey = loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/key/main/skibidikey"))()
-getgenv().KeyInput = "string" -- Require For The Key To Work
-
 -- function
 function ConfigLoaded()
-
 OrionLib:MakeNotification({
         Name = "Configuration Loaded!",
         Content = "Loaded the config key you previously entered",
         Image = "rbxassetid://4483345998",
-        Time = 2.5
+        Time = 3
 })
 end
 
 function NotifyStartHub()
-
 wait(.5)
 MakeScriptHub()
 OrionLib:MakeNotification({
@@ -29,18 +25,20 @@ OrionLib:MakeNotification({
         Image = "rbxassetid://4483345998",
         Time = 3
 })
+ngudot()
+end
+
+function ngudot()
 wait(1)
 OrionLib:MakeNotification({
         Name = "Script Has Updated!",
-        Content = "Enjoy my script now",
+        Content = "Enjoy my script now!!!!!",
         Image = "rbxassetid://4483345998",
         Time = 2.5
 })
 end
 
-
-function MakeScriptHub() 
-
+function MakeScriptHub()
 local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptHub_Config", IntroText = "Loading Hub..."})
 
 -- About Tab
@@ -61,7 +59,7 @@ local ChangelogSection = AboutTab:AddSection({
 })
 
 AboutTab:AddLabel("[+] Added new Tab About for script")
-AboutTab:AddLabel("[+] Added changelogs (Tab About), you can see the changelog of this script!!!")
+AboutTab:AddLabel("[+] Added changelogs, you can see the changelog of this script!!!")
 AboutTab:AddLabel("[+] Edited the notification bar to make it more reasonable")
 
 -- Main Tab
@@ -571,7 +569,6 @@ CreditTab:AddButton({
 end
 
 function CheckKeyNotify()
-
 OrionLib:MakeNotification({ 
     Name = "Checking Key", 
     Content = "Checking The Key You Entered", 
@@ -580,6 +577,14 @@ OrionLib:MakeNotification({
 })
 end
 
+function ngulon()
+OrionLib:MakeNotification({
+        Name = "Logged In!",
+        Content = "You need key "..Player.Name..".",
+        Image = "rbxassetid://4483345998",
+        Time = 3.5
+})
+end
 
 function readKey()
      if readfile("/MetaScriptKey/key.txt") == loadedKey then
@@ -587,13 +592,8 @@ function readKey()
                   wait(1)
                   NotifyStartHub()
           else
-                  OrionLib:MakeNotification({
-        Name = "Logged In!",
-        Content = "You need key "..Player.Name..".",
-        Image = "rbxassetid://4483345998",
-        Time = 3.5
-})
-                  local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptKey", IntroText = "Loading Hub..."}) 
+                  ngulon()
+                  local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptKey", IntroText = "Key System..."}) 
                   local KeyTab = Window:MakeTab({
         Name = "Main",
         Icon = "rbxassetid://4483345998",
@@ -674,7 +674,7 @@ CreditTab:AddButton({
         Name = "MetaScript Hub",
         Content = "The link has been copied",
         Image = "rbxassetid://4483345998",
-        Time = 3
+        Time = 4
 })
           end    
 })
