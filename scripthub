@@ -1,28 +1,70 @@
 local OrionLib = loadstring(game:HttpGet('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source'))()
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Player = game.Players.LocalPlayer
-local loadedKey = loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/key/main/skibidikey"))()
-getgenv().KeyInput = "string"
+local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MetaHub_Config", IntroText = "Loading Hub..."})
 
-Gui_Version = "1.1.1"
+local Speed = 60 -- Second 
+local DayDuration = 1 -- Minute 
+local NightDuration = 1 -- Minute
 
-function ConfigLoaded()
+local Lighting = game.Lighting 
+local TweenService = game:GetService("TweenService")
+
+Gui_Version = "1.1.2"
+
+function KeybindNotifyJ()
 OrionLib:MakeNotification({
-        Name = "Configuration Loaded!",
-        Content = "Loaded the config key you previously entered",
+        Name = "MetaScript Hub",
+        Content = "You need to press J to open or close this script",
         Image = "rbxassetid://4483345998",
         Time = 3
 })
-NotifyStartHub()
 end
 
+function bucu()
+wait(.1)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Parry/main/Real"))()
+wait(.2)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Spam-Parry/main/Bladeballnew"))()
+end
+
+function Destroy()
+game:GetService("CoreGui").Orion:Destroy()
+end
+
+function day()
+TweenService:Create(Lighting, TweenInfo.new(Speed), {ClockTime = 12}):Play() 
+TweenService:Create(Lighting, TweenInfo.new(Speed), {Brightness = 3.05}):Play() 
+TweenService:Create(Lighting, TweenInfo.new(Speed), {Ambient = Color3.fromRGB(106, 130, 186)}):Play() 
+TweenService:Create(Lighting, TweenInfo.new(Speed), {ColorShift_Bottom = Color3.fromRGB(0,0,0)}):Play() 
+end
+
+function night() 
+TweenService:Create(Lighting, TweenInfo.new(Speed), {ClockTime = 0}):Play() 
+TweenService:Create(Lighting, TweenInfo.new(Speed), {Brightness = 0.4}):Play() 
+TweenService:Create(Lighting, TweenInfo.new(Speed), {Ambient = Color3.fromRGB(0,0,0)}):Play() 
+TweenService:Create(Lighting, TweenInfo.new(Speed), {ColorShift_Bottom = Color3.fromRGB(0,0,0)}):Play() 
+end
+
+function LinkCopied()
+OrionLib:MakeNotification({
+        Name = "MetaScript Hub",
+        Content = "The link has been copied",
+        Image = "rbxassetid://4483345998",
+        Time = 4
+})
+end
+
+NotifyStartHub()
+
 function NotifyStartHub()
-MakeScriptHub()
 OrionLib:MakeNotification({
         Name = "Welcome to script:)",
         Content = "Please enjoy my script, my friends:)",
         Image = "rbxassetid://4483345998",
         Time = 3
 })
+wait(1.5)
 ngudot()
 end
 
@@ -35,8 +77,9 @@ OrionLib:MakeNotification({
 })
 end
 
-function MakeScriptHub()
-local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptHub_Config", IntroText = "Loading Hub..."})
+
+
+
 
 local AboutTab = Window:MakeTab({
         Name = "About",
@@ -55,9 +98,11 @@ local ChangelogSection = AboutTab:AddSection({
 })
 
 AboutTab:AddLabel("[+] Added new Tab About for script")
-AboutTab:AddLabel("[+] Added changelogs, you can see the changelog of this script!!!")
+AboutTab:AddLabel("[+] Added day-night cycle to script")
+AboutTab:AddLabel("[+] Remove Key System")
+AboutTab:AddLabel("[+] Added changelogs, you can see the changelog of this script")
 AboutTab:AddLabel("[+] Edited the notification bar to make it more reasonable")
-AboutTab:AddLabel("[+] Fixed the 'attempt to call a nil value' error in the console to show the gui (the error has been present since the new fluxus update)")
+AboutTab:AddLabel("[+] Fixed the 'attempt to call a nil value' error in the console")
 
 local MainTab = Window:MakeTab({
         Name = "Main",
@@ -118,7 +163,7 @@ MainTab:AddLabel("For Input")
 MainTab:AddTextbox({
         Name = "WalkSpeed (Default = 16)",
         Default = "",
-        TextDisappear = true,
+        TextDisappear = false,
         Callback = function(a)
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
                 print(a)
@@ -128,7 +173,7 @@ MainTab:AddTextbox({
 MainTab:AddTextbox({
         Name = "Jump Height (Default = 50)",
         Default = "",
-        TextDisappear = true,
+        TextDisappear = false,
         Callback = function(a)
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = a
                 print(a)
@@ -138,7 +183,7 @@ MainTab:AddTextbox({
 MainTab:AddTextbox({
         Name = "Gravity (Default = 155)",
         Default = "",
-        TextDisappear = true,
+        TextDisappear = false,
         Callback = function(a)
         game.Workspace.Gravity = a
                 print(a)
@@ -178,6 +223,7 @@ local InfiniteJumpEnabled = true
 game:GetService("UserInputService").JumpRequest:connect(function()
     if InfiniteJumpEnabled then
         game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 75
     end
 end)
           end    
@@ -188,15 +234,15 @@ local MainScriptSection = MainTab:AddSection({
 })
 
 MainTab:AddButton({
-        Name = "Fly Gui",
+        Name = "Fly Gui V3",
         Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro69Yes/sussy-Script/main/SecuredFlyGuiv3.lua'))()
                       print("Active!")
           end    
 })
 
 MainTab:AddButton({
-        Name = "Fe Perm ShiftLock",
+        Name = "Perm ShiftLock",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/MiniNoobie/ShiftLockx/main/Shiftlock-MiniNoobie",true))()
                       print("Active!")
@@ -237,6 +283,22 @@ MainTab:AddColorpicker({
 	Callback = function(Value)
 		print(Value)
 	end	  
+})
+
+MainTab:AddButton({
+        Name = "Turn night into day",
+        Callback = function()
+                      day()
+                      print("Active!")
+          end    
+})
+
+MainTab:AddButton({
+        Name = "Turn day into night",
+        Callback = function()
+                      night()
+                      print("Active!")
+          end    
 })
 
 local FeTab = Window:MakeTab({
@@ -348,11 +410,21 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/mai
 })
 
 ScriptTab:AddButton({
-        Name = "Super Toilet Brawl (Beta)",
+        Name = "Stay In The Light",
         Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SmalerHub/SmalerHub/main/The%20Best%20/Super%20Toilet%20Brawl%20/Script%20/Main%20App%20/For%20Smaler%20Hub"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/InfinityMercury/Scripts/main/StayInTheLight/loader.lua",true))()
+KeybindNotifyJ()
                       print("Script Active!")
           end    
+})
+
+ScriptTab:AddBind({
+	Name = "KeyBind (J)",
+	Default = Enum.KeyCode.J,
+	Hold = false,
+	Callback = function()
+		print("Press J")
+	end    
 })
 
 local BBTab = Window:MakeTab({
@@ -408,9 +480,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/s-o-a-b/nexus/main/lo
 BBTab:AddButton({
         Name = "Auto Parry (Detect Spam And No Menu)",
         Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Parry/main/Real"))()
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Spam-Parry/main/Bladeballnew"))()
+bucu()
                       print("Script Active!")
           end    
 })
@@ -458,15 +528,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/ma
 })
 
 BFTab:AddButton({
-	Name = "Hoho Hub V3 (Need Key)",
-	Callback = function()
-_G.HohoVersion = "v3" 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
-              		print("Script Active!")
-  	end    
-})
-
-BFTab:AddButton({
         Name = "Master Hub (Vietnam)",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/onepicesenpai/onepicesenpai/main/onichanokaka'))()
@@ -478,6 +539,14 @@ BFTab:AddButton({
         Name = "MTriet Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
+                      print("Script Active!")
+          end    
+})
+
+BFTab:AddButton({
+        Name = "Hoho Hub",
+        Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
                       print("Script Active!")
           end    
 })
@@ -517,16 +586,16 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Anniecuti/Free-Scr/ma
 BFTab:AddButton({
         Name = "Vector Hub (English)",
         Callback = function()
-_G.Mode = "English" -- "English" & " Vietnam"
+_G.Mode = "English"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Tuxoz/VectorHub/main/MB*PC.lua"))()
                       print("Script Active!")
           end    
 })
 
 BFTab:AddButton({
-        Name = "Vector Hub (VietNam)",
+        Name = "Vector Hub (Vietnam)",
         Callback = function()
-_G.Mode = "Vietnam" -- "English" & " Vietnam"
+_G.Mode = "Vietnam"
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Tuxoz/VectorHub/main/MB*PC.lua"))()
                       print("Script Active!")
           end    
@@ -590,139 +659,8 @@ CreditTab:AddButton({
         Name = "Copy Discord",
         Callback = function()
                       setclipboard("https://discord.gg/KKtc8PTKkz")
-              OrionLib:MakeNotification({
-        Name = "MetaScript Hub",
-        Content = "The link has been copied",
-        Image = "rbxassetid://4483345998",
-        Time = 4
-})
+                      LinkCopied()
           end    
 })
-end
-
-function CheckKeyNotify()
-OrionLib:MakeNotification({ 
-    Name = "Checking Key", 
-    Content = "Checking The Key You Entered", 
-    Image = "rbxassetid://4483345998", 
-    Time = 3 
-})
-end
-
-function ngulon()
-OrionLib:MakeNotification({
-        Name = "Logged In!",
-        Content = "You need key "..Player.Name..".",
-        Image = "rbxassetid://4483345998",
-        Time = 3.5
-})
-end
-
-function readKey()
-     if readfile("/MetaScriptKey/key.txt") == loadedKey then
-                  ConfigLoaded()
-          else
-                  ngulon()
-                  local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaScriptKey", IntroText = "Key System..."}) 
-                  local KeyTab = Window:MakeTab({
-        Name = "Main",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-KeyTab:AddTextbox({
-        Name = "Key",
-        Default = "",
-        TextDisappear = false,
-        Callback = function(Value)
-            getgenv().KeyInput = Value
-        end          
-})
-
-KeyTab:AddButton({
-        Name = "Check Key",
-        Callback = function()
-        if getgenv().KeyInput == loadedKey then 
-            CheckKeyNotify()
-            wait(2) 
-            OrionLib:MakeNotification({ 
-                Name = "Correct Key!", 
-                Content = "The key you entered is Correct.", 
-                Image = "rbxassetid://4483345998", 
-                Time = 2 
-            }) 
-            wait(1) 
-            OrionLib:Destroy() 
-            wait(.2) 
-            writefile("/MetaScriptKey/key.txt", loadedKey)
-            NotifyStartHub()
-       else 
-           CheckKeyNotify()
-           wait(2) 
-           OrionLib:MakeNotification({ 
-               Name = "Incorrect Key!", 
-               Content = "The key you entered is incorrect.", 
-               Image = "rbxassetid://4483345998", 
-               Time = 3.5 
-           }) 
-       end
-          end    
-})
-
-KeyTab:AddButton({
-        Name = "Copy Key",
-        Callback = function()
-                      setclipboard("https://discord.gg/KKtc8PTKkz")
-              OrionLib:MakeNotification({
-        Name = "Key System",
-        Content = "The key link has been copied",
-        Image = "rbxassetid://4483345998",
-        Time = 3.5
-})
-          end    
-})
-KeyTab:AddParagraph("Note:","This 'Copy Key' button will copy our discord because in our discord there is a key")
-
-local CreditTab = Window:MakeTab({
-        Name = "Credit",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-local CreditSection = CreditTab:AddSection({
-        Name = "Script Helpers"
-})
-
-CreditTab:AddLabel("By SansYT789(Youtube)")
-CreditTab:AddLabel("By RoyRedRedVN(Youtube)")
-
-CreditTab:AddButton({
-        Name = "Copy Discord",
-        Callback = function()
-                      setclipboard("https://discord.gg/KKtc8PTKkz")
-              OrionLib:MakeNotification({
-        Name = "MetaScript Hub",
-        Content = "The link has been copied",
-        Image = "rbxassetid://4483345998",
-        Time = 4
-})
-          end    
-})
-          end
-end
-
-
-if isfolder("/MetaScriptKey") then
-     if isfile("/MetaScriptKey/key.txt", "") then
-         readKey()
-     else
-            writefile("/MetaScriptKey/key.txt", "")
-            readKey()
-     end
-else
-       makefolder("MetaScriptKey")
-       writefile("/MetaScriptKey/key.txt", "")
-       readKey()
-end
 
 OrionLib:Init()
