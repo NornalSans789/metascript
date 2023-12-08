@@ -55,27 +55,19 @@ OrionLib:MakeNotification({
 })
 end
 
-NotifyStartHub()
-
-function NotifyStartHub()
 OrionLib:MakeNotification({
         Name = "Welcome to script:)",
         Content = "Please enjoy my script, my friends:)",
         Image = "rbxassetid://4483345998",
         Time = 3
 })
-wait(1.5)
-ngudot()
-end
 
-function ngudot()
 OrionLib:MakeNotification({
         Name = "Script Has Updated!",
         Content = "Enjoy my script now!!!!!",
         Image = "rbxassetid://4483345998",
-        Time = 2.5
+        Time = 5.5
 })
-end
 
 
 
@@ -419,7 +411,7 @@ KeybindNotifyJ()
 })
 
 ScriptTab:AddBind({
-	Name = "KeyBind (J)",
+	Name = "KeyBind J",
 	Default = Enum.KeyCode.J,
 	Hold = false,
 	Callback = function()
@@ -480,7 +472,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/s-o-a-b/nexus/main/lo
 BBTab:AddButton({
         Name = "Auto Parry (Detect Spam And No Menu)",
         Callback = function()
-bucu()
+            bucu()
                       print("Script Active!")
           end    
 })
@@ -528,7 +520,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/ma
 })
 
 BFTab:AddButton({
-        Name = "Master Hub (Vietnam)",
+        Name = "Master Hub",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/onepicesenpai/onepicesenpai/main/onichanokaka'))()
                       print("Script Active!")
@@ -579,24 +571,6 @@ BFTab:AddButton({
         Name = "Annie Hub",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Anniecuti/Free-Scr/main/Annie-Hub.lua"))()
-                      print("Script Active!")
-          end    
-})
-
-BFTab:AddButton({
-        Name = "Vector Hub (English)",
-        Callback = function()
-_G.Mode = "English"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tuxoz/VectorHub/main/MB*PC.lua"))()
-                      print("Script Active!")
-          end    
-})
-
-BFTab:AddButton({
-        Name = "Vector Hub (Vietnam)",
-        Callback = function()
-_G.Mode = "Vietnam"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Tuxoz/VectorHub/main/MB*PC.lua"))()
                       print("Script Active!")
           end    
 })
