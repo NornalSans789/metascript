@@ -197,7 +197,7 @@ end)
 MainTab:AddButton({
         Name = "Fly Gui V3",
         Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro69Yes/sussy-Script/main/SecuredFlyGuiv3.lua'))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/XNEOFF/FlyGuiV3/main/FlyGuiV3.txt"))()
                       print("Active!")
           end    
 })
