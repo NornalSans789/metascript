@@ -182,16 +182,32 @@ local MainScriptSection = MainTab:AddSection({
         Name = "Script Main Section"
 })
 
-MainTab:AddButton({
-        Name = "Inf Jump (Forever)",
-        Callback = function()
-local InfiniteJumpEnabled = true
+MainTab:AddToggle({
+	Name = "Inf Jump",
+	Default = false,
+	Callback = function(p)
+getgenv().InfJ = p
 game:GetService("UserInputService").JumpRequest:connect(function()
-    if InfiniteJumpEnabled then
+    if InfJ == true then
         game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
     end
 end)
-          end    
+	end    
+})
+
+MainTab:AddToggle({
+	Name = "Noclip",
+	Default = false,
+	Callback = function(n)
+getgenv().Noclip = n
+game:GetService("RunService").Heartbeat:Connect(function()
+    if Noclip == true then 
+       game:GetService("RunService").Stepped:wait()
+       game.Players.LocalPlayer.Character.Head.CanCollide = false
+       game.Players.LocalPlayer.Character.Torso.CanCollide = false
+    end
+end)
+	end    
 })
 
 MainTab:AddButton({
