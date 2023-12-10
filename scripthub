@@ -348,14 +348,6 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/
 })
 
 ScriptTab:AddButton({
-        Name = "Super Toilet Brawl",
-        Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/OrionHub/main/SuperToiletBrawl"))()
-                      print("Script Active!")
-          end    
-})
-
-ScriptTab:AddButton({
         Name = "Doors (Blacking And Bob Hub)",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-obf/main/Doors%20Blackking%20And%20BobHub"))()
