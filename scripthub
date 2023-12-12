@@ -1,9 +1,25 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-local Player = game.Players.LocalPlayer
-local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "MetaHub_Config", IntroText = "Loading Hub..."})
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local lp = Players.LocalPlayer
+local playersList = Players:GetPlayers()
+local numberOfPlayers = playersList
+local CoreGui = game:FindService("CoreGui")
+local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaHub_Config", IntroText = "Loading Hub..."})
 
-Gui_Version = "1.1.2"
+Gui_Version = "1.1.4"
+
+_G.HeadSize = 20
+getgenv().ScriptInput = ""
+
+local FillColor = Color3.fromRGB(255,255,255)
+local DepthMode = "AlwaysOnTop"
+local FillTransparency = 0.5
+local OutlineColor = Color3.fromRGB(255,255,255)
+local OutlineTransparency = 0
+local uis = game:GetService("UserInputService")
+local xrayOn = false
 
 function KeybindNotifyJ()
 OrionLib:MakeNotification({
@@ -55,16 +71,19 @@ local AboutSection = AboutTab:AddSection({
 })
 
 AboutTab:AddLabel("Version: "..Gui_Version)
+AboutTab:AddLabel("GameId: "..game.PlaceId)
+AboutTab:AddLabel("GameVersion: "..Game.PlaceVersion)
+AboutTab:AddLabel("PlayerId: "..player.UserId)
+AboutTab:AddLabel("Account Age: "..player.AccountAge)
+AboutTab:AddLabel("Player in Server: "..numberOfPlayers)
 
 local ChangelogSection = AboutTab:AddSection({
         Name = "Changelogs Section"
 })
 
-AboutTab:AddLabel("[+] Added new Tab About for script")
-AboutTab:AddLabel("[+] Remove Key System")
-AboutTab:AddLabel("[+] Added changelogs, you can see the changelog of this script")
-AboutTab:AddLabel("[+] Edited the notification bar to make it more reasonable")
-AboutTab:AddLabel("[+] Fixed not show gui")
+AboutTab:AddLabel("[+] Added some toggle buttons to the script")
+AboutTab:AddLabel("[+] Added a few informational labels")
+AboutTab:AddLabel("[+] Added a new Tab")
 
 local MainTab = Window:MakeTab({
         Name = "Main",
@@ -76,50 +95,6 @@ local MainPlayerSection = MainTab:AddSection({
         Name = "Player Main Section"
 })
 
-MainTab:AddLabel("For Slider")
-
-MainTab:AddSlider({
-        Name = "WalkSpeed",
-        Min = 16,
-        Max = 1000,
-        Default = 5,
-        Color = Color3.fromRGB(255,255,255),
-        Increment = 1,
-        ValueName = "Speed",
-        Callback = function(a)
-        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
-                print(a)
-        end    
-})
-
-MainTab:AddSlider({
-        Name = "Jump Height",
-        Min = 50,
-        Max = 2000,
-        Default = 5,
-        Color = Color3.fromRGB(255,255,255),
-        Increment = 1,
-        ValueName = "Height",
-        Callback = function(a)
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = a
-                print(a)
-        end    
-})
-
-MainTab:AddSlider({
-        Name = "Gravity",
-        Min = 155,
-        Max = 3000,
-        Default = 5,
-        Color = Color3.fromRGB(255,255,255),
-        Increment = 1,
-        ValueName = "Heavy",
-        Callback = function(a)
-        game.Workspace.Gravity = a
-                print(a)
-        end    
-})
-
 MainTab:AddLabel("For Input")
 
 MainTab:AddTextbox({
@@ -127,6 +102,7 @@ MainTab:AddTextbox({
         Default = "",
         TextDisappear = false,
         Callback = function(a)
+        getgenv().WalkSpeed = a
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
                 print(a)
         end          
@@ -137,6 +113,7 @@ MainTab:AddTextbox({
         Default = "",
         TextDisappear = false,
         Callback = function(a)
+        getgenv().JumpBoost = a
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = a
                 print(a)
         end          
@@ -147,7 +124,19 @@ MainTab:AddTextbox({
         Default = "",
         TextDisappear = false,
         Callback = function(a)
+        getgenv().Gravity = a
         game.Workspace.Gravity = a
+                print(a)
+        end          
+})
+
+MainTab:AddTextbox({
+        Name = "Fov (Default = 70)",
+        Default = "",
+        TextDisappear = false,
+        Callback = function(a)
+        getgenv().Fov = a
+        game.Workspace.CurrentCamera.FieldOfView = a
                 print(a)
         end          
 })
@@ -178,15 +167,103 @@ game.Workspace.Gravity = 155
           end    
 })
 
+MainTab:AddButton({
+        Name = "Reset Fov",
+        Callback = function()
+game.Workspace.CurrentCamera.FieldOfView = 70
+                      print("Active!")
+          end    
+})
+
+MainTab:AddLabel("For Loop Toggle")
+
+MainTab:AddToggle({
+	Name = "Loop All",
+	Default = false,
+	Callback = function(loop)
+getgenv().LoopAll = loop
+
+if LoopAll == true then
+while LoopAll == true then
+wait(.1)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = getgenv().WalkSpeed
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = getgenv().JumpBoost
+game.Workspace.Gravity = getgenv().Gravity
+game.Workspace.CurrentCamera.FieldOfView = getgenv().Fov
+end
+end
+	end    
+})
+
+MainTab:AddToggle({
+	Name = "Loop WalkSpeed",
+	Default = false,
+	Callback = function(loop)
+getgenv().LoopWalkSpeed = loop
+
+if LoopWalkSpeed == true then
+while LoopWalkSpeed == true then
+wait(.1)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = getgenv().WalkSpeed
+end
+end
+	end    
+})
+
+MainTab:AddToggle({
+	Name = "Loop JumpBoost",
+	Default = false,
+	Callback = function(loop)
+getgenv().LoopJumpBoost = loop
+
+if LoopJumpBoost == true then
+while LoopJumpBoost == true then
+wait(.1)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = getgenv().JumpBoost
+end
+end
+	end    
+})
+
+MainTab:AddToggle({
+	Name = "Loop Gravity",
+	Default = false,
+	Callback = function(loop)
+getgenv().LoopGravity = loop
+
+if LoopGravity == true then
+while LoopGravity == true then
+wait(.1)
+game.Workspace.Gravity = getgenv().Gravity
+end
+end
+	end    
+})
+
+MainTab:AddToggle({
+	Name = "Loop Fov",
+	Default = false,
+	Callback = function(loop)
+getgenv().LoopFov = loop
+
+if LoopFov == true then
+while LoopFov == true then
+wait(.1)
+game.Workspace.CurrentCamera.FieldOfView = getgenv().Fov
+end
+end
+	end    
+})
+
 local MainScriptSection = MainTab:AddSection({
-        Name = "Script Main Section"
+        Name = "Toggle Main Section"
 })
 
 MainTab:AddToggle({
 	Name = "Inf Jump",
 	Default = false,
-	Callback = function(p)
-getgenv().InfJ = p
+	Callback = function(jump)
+getgenv().InfJ = jump
 game:GetService("UserInputService").JumpRequest:connect(function()
     if InfJ == true then
         game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState("Jumping")
@@ -198,8 +275,8 @@ end)
 MainTab:AddToggle({
 	Name = "Noclip",
 	Default = false,
-	Callback = function(n)
-getgenv().Noclip = n
+	Callback = function(noclip)
+getgenv().Noclip = noclip
 game:GetService("RunService").Heartbeat:Connect(function()
     if Noclip == true then 
        game:GetService("RunService").Stepped:wait()
@@ -208,6 +285,127 @@ game:GetService("RunService").Heartbeat:Connect(function()
     end
 end)
 	end    
+})
+
+MainTab:AddToggle({
+	Name = "Hitbox",
+	Default = false,
+	Callback = function(hit)
+getgenv().Hitbox = hit
+game:GetService('RunService').RenderStepped:connect(function()
+if Hitbox == true then
+for i,v in next, game:GetService('Players'):GetPlayers() do
+if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+pcall(function()
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 0.7
+v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
+v.Character.HumanoidRootPart.Material = "Neon"
+v.Character.HumanoidRootPart.CanCollide = false
+end)
+end
+end
+end
+end
+	end    
+})
+
+MainTab:AddToggle({
+	Name = "Xray",
+	Default = false,
+	Callback = function(xray)
+getgenv().Xray = xray
+uis.InputBegan:Connect(function(inp, processed)
+	
+	
+	if processed then return end
+	
+	
+	if Xray == true then
+		
+		
+		xrayOn = not xrayOn
+		
+		
+		for i, descendant in pairs(workspace:GetDescendants()) do
+				
+			if descendant:IsA("BasePart") then
+				
+				if xrayOn then
+					
+					if not descendant:FindFirstChild("OriginalTransparency") then
+						
+						local originalTransparency = Instance.new("NumberValue")
+						originalTransparency.Name = "OriginalTransparency"
+						originalTransparency.Value = descendant.Transparency
+						originalTransparency.Parent = descendant
+					end
+					
+					descendant.Transparency = 0.5
+					
+				else
+					descendant.Transparency = descendant.OriginalTransparency.Value
+				end
+			end
+		end
+	end
+end)
+	end    
+})
+
+MainTab:AddToggle({
+	Name = "Esp Highlight",
+	Default = false,
+	Callback = function(esp)
+getgenv().Esp = esp
+
+if Esp == true then
+local connections = {}
+
+local Storage = Instance.new("Folder")
+Storage.Parent = CoreGui
+Storage.Name = "Highlight_Storage"
+
+local function Highlight(plr)
+local Highlight = Instance.new("Highlight")
+Highlight.Name = plr.Name
+Highlight.FillColor = FillColor
+Highlight.DepthMode = DepthMode
+Highlight.FillTransparency = FillTransparency
+Highlight.OutlineColor = OutlineColor
+Highlight.OutlineTransparency = 0
+Highlight.Parent = Storage
+
+local plrchar = plr.Character
+if plrchar then
+Highlight.Adornee = plrchar
+end
+
+connections[plr] = plr.CharacterAdded:Connect(function(char)
+Highlight.Adornee = char 
+end)
+end
+
+Players.PlayerAdded:Connect(Highlight)
+for i,v in next, Players:GetPlayers() do
+Highlight(v)
+end
+
+Players.PlayerRemoving:Connect(function(plr)
+local plrname = plr.Name
+if Storage[plrname] then
+Storage[plrname]:Destroy()
+end
+if connections[plr] then
+connections[plr]:Disconnect()
+end
+end)
+end
+	end    
+})
+
+local MainScriptSection = MainTab:AddSection({
+        Name = "Script Main Section"
 })
 
 MainTab:AddButton({
@@ -250,16 +448,32 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord
           end    
 })
 
-local MainColorPickerSection = MainTab:AddSection({
-        Name = "Other Main Section"
+local ExecutorTab = Window:MakeTab({
+        Name = "Executors",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
 })
 
-MainTab:AddColorpicker({
-	Name = "ColorPicker",
-	Default = Color3.fromRGB(255, 0, 0),
-	Callback = function(Color3)
-		print(Color3)
-	end	  
+local ExecutorSection = ExecutorTab:AddSection({
+        Name = "Executor Section"
+})
+
+ExecutorTab:AddTextbox({
+        Name = "Script Here:",
+        Default = "",
+        TextDisappear = false,
+        Callback = function(input)
+        getgenv().ScriptInput = input
+                print(input)
+        end          
+})
+
+ExecutorTab:AddButton({
+        Name = "Load Script",
+        Callback = function()
+getgenv().ScriptInput
+                      print("Active!")
+          end    
 })
 
 local FeTab = Window:MakeTab({
@@ -359,6 +573,14 @@ ScriptTab:AddButton({
         Name = "Pls Donate",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/tzechco/roblox-scripts/main/PLS%20DONATE/autofarm.lua'))()
+                      print("Script Active!")
+          end    
+})
+
+ScriptTab:AddButton({
+        Name = "Evade",
+        Callback = function()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Hetcuunoi/Evade-Gen-1/main/BetaHub.Evade%20Gen%201.lua.txt'))()
                       print("Script Active!")
           end    
 })
