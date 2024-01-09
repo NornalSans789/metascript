@@ -1,44 +1,15 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/thanhdat4461/OrionMoblie/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Meta Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaHub", IntroText = "Loading Hub..."})
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local lp = Players.LocalPlayer
-local playersList = Players:GetPlayers()
-local CoreGui = game:FindService("CoreGui")
-local Window = OrionLib:MakeWindow({Name = "MetaScript Hub", HidePremium = false, SaveConfig = false, ConfigFolder = "MetaHub_Config", IntroText = "Loading Hub..."})
-
-Gui_Version = "1.1.3"
-
-getgenv().ScriptInput = ""
-
-local FillColor = Color3.fromRGB(255,255,255)
-local DepthMode = "AlwaysOnTop"
-local FillTransparency = 0.5
-local OutlineColor = Color3.fromRGB(255,255,255)
-local OutlineTransparency = 0
-local uis = game:GetService("UserInputService")
-local xrayOn = false
-
-function KeybindNotifyJ()
-OrionLib:MakeNotification({
-        Name = "MetaScript Hub",
-        Content = "You need to press J to open or close this script",
-        Image = "rbxassetid://4483345998",
-        Time = 3
-})
-end
-
-function bucu()
-wait(.1)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Parry/main/Real"))()
-wait(.2)
-loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Spam-Parry/main/Bladeballnew"))()
-end
+local getplayer = game:GetService("Players"):GetPlayers()
 
 function LinkCopied()
 OrionLib:MakeNotification({
-        Name = "MetaScript Hub",
+        Name = "Meta Hub",
         Content = "The link has been copied",
-        Image = "rbxassetid://4483345998",
+        Image = "rbxassetid://7733764083",
         Time = 4
 })
 end
@@ -46,20 +17,13 @@ end
 OrionLib:MakeNotification({
         Name = "Welcome to script:)",
         Content = "Please enjoy my script, my friends:)",
-        Image = "rbxassetid://4483345998",
+        Image = "rbxassetid://7734053697",
         Time = 3
 })
 
-OrionLib:MakeNotification({
-        Name = "Script Has Updated!",
-        Content = "Enjoy my script now!!!!!",
-        Image = "rbxassetid://4483345998",
-        Time = 5.5
-})
-
 local AboutTab = Window:MakeTab({
-        Name = "About",
-        Icon = "rbxassetid://4483345998",
+        Name = "Tab About",
+        Icon = "rbxassetid://7733964719",
         PremiumOnly = false
 })
 
@@ -68,17 +32,34 @@ local AboutSection = AboutTab:AddSection({
 })
 
 AboutTab:AddLabel("Version: "..Gui_Version)
+AboutTab:AddLabel("Status: Bad")
+
+AboutTab:AddButton({
+        Name = "Rejoin",
+        Callback = function()
+        game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+          end    
+})
+
+AboutTab:AddButton({
+        Name = "Server Small",
+        Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/metascript/main/serversmall"))()
+                      print("Join Server Small...")
+          end    
+})
 
 local ChangelogSection = AboutTab:AddSection({
         Name = "Changelogs Section"
 })
 
 AboutTab:AddLabel("[+] Added some toggle buttons to the script")
-AboutTab:AddLabel("[+] Added a new Tab")
+AboutTab:AddLabel("[+] Rewritten the code to fix some errors")
+AboutTab:AddLabel("[+] Fix the errors appear again!!!")
 
 local MainTab = Window:MakeTab({
-        Name = "Main",
-        Icon = "rbxassetid://4483345998",
+        Name = "Tab Main",
+        Icon = "rbxassetid://7733960981",
         PremiumOnly = false
 })
 
@@ -91,7 +72,7 @@ MainTab:AddLabel("For Input")
 MainTab:AddTextbox({
         Name = "WalkSpeed (Default = 16)",
         Default = "",
-        TextDisappear = false,
+        TextDisappear = true,
         Callback = function(a)
         getgenv().WalkSpeed = a
         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = a
@@ -102,7 +83,7 @@ MainTab:AddTextbox({
 MainTab:AddTextbox({
         Name = "Jump Height (Default = 50)",
         Default = "",
-        TextDisappear = false,
+        TextDisappear = true,
         Callback = function(a)
         getgenv().JumpBoost = a
         game.Players.LocalPlayer.Character.Humanoid.JumpPower = a
@@ -111,9 +92,9 @@ MainTab:AddTextbox({
 })
 
 MainTab:AddTextbox({
-        Name = "Gravity (Default = 155)",
+        Name = "Gravity (Default = 150)",
         Default = "",
-        TextDisappear = false,
+        TextDisappear = true,
         Callback = function(a)
         getgenv().Gravity = a
         game.Workspace.Gravity = a
@@ -124,7 +105,7 @@ MainTab:AddTextbox({
 MainTab:AddTextbox({
         Name = "Fov (Default = 70)",
         Default = "",
-        TextDisappear = false,
+        TextDisappear = true,
         Callback = function(a)
         getgenv().Fov = a
         game.Workspace.CurrentCamera.FieldOfView = a
@@ -133,6 +114,17 @@ MainTab:AddTextbox({
 })
 
 MainTab:AddLabel("For Reset Button")
+
+MainTab:AddButton({
+        Name = "Reset All",
+        Callback = function()
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
+game.Workspace.Gravity = 150
+game.Workspace.CurrentCamera.FieldOfView = 70
+                      print("Active!")
+          end    
+})
 
 MainTab:AddButton({
         Name = "Reset WalkSpeed",
@@ -153,7 +145,7 @@ game.Players.LocalPlayer.Character.Humanoid.JumpPower = 50
 MainTab:AddButton({
         Name = "Reset Gravity",
         Callback = function()
-game.Workspace.Gravity = 155
+game.Workspace.Gravity = 150
                       print("Active!")
           end    
 })
@@ -169,18 +161,16 @@ game.Workspace.CurrentCamera.FieldOfView = 70
 MainTab:AddLabel("For Loop Toggle")
 
 MainTab:AddToggle({
-	Name = "Loop All",
+	Name = "Loop WalkSpeed/JumpBoost",
 	Default = false,
 	Callback = function(loop)
 getgenv().LoopAll = loop
 
 if LoopAll == true then
-while LoopAll == true do
+while true do
 wait(.1)
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = getgenv().WalkSpeed
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = getgenv().JumpBoost
-game.Workspace.Gravity = getgenv().Gravity
-game.Workspace.CurrentCamera.FieldOfView = getgenv().Fov
+player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeed
+player.Character.Humanoid.JumpPower = getgenv().JumpBoost
 end
 end
 	end    
@@ -193,9 +183,9 @@ MainTab:AddToggle({
 getgenv().LoopWalkSpeed = loop
 
 if LoopWalkSpeed == true then
-while LoopWalkSpeed == true do
+while true do
 wait(.1)
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = getgenv().WalkSpeed
+player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeed
 end
 end
 	end    
@@ -208,39 +198,9 @@ MainTab:AddToggle({
 getgenv().LoopJumpBoost = loop
 
 if LoopJumpBoost == true then
-while LoopJumpBoost == true do
+while true do
 wait(.1)
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = getgenv().JumpBoost
-end
-end
-	end    
-})
-
-MainTab:AddToggle({
-	Name = "Loop Gravity",
-	Default = false,
-	Callback = function(loop)
-getgenv().LoopGravity = loop
-
-if LoopGravity == true then
-while LoopGravity == true do
-wait(.1)
-game.Workspace.Gravity = getgenv().Gravity
-end
-end
-	end    
-})
-
-MainTab:AddToggle({
-	Name = "Loop Fov",
-	Default = false,
-	Callback = function(loop)
-getgenv().LoopFov = loop
-
-if LoopFov == true then
-while LoopFov == true do
-wait(.1)
-game.Workspace.CurrentCamera.FieldOfView = getgenv().Fov
+player.Character.Humanoid.JumpPower = getgenv().JumpBoost
 end
 end
 	end    
@@ -273,102 +233,12 @@ game:GetService("RunService").Heartbeat:Connect(function()
        game:GetService("RunService").Stepped:wait()
        game.Players.LocalPlayer.Character.Head.CanCollide = false
        game.Players.LocalPlayer.Character.Torso.CanCollide = false
+    else
+       game:GetService("RunService").Stepped:wait()
+       game.Players.LocalPlayer.Character.Head.CanCollide = true
+       game.Players.LocalPlayer.Character.Torso.CanCollide = true
     end
 end)
-	end    
-})
-
-MainTab:AddToggle({
-	Name = "Xray",
-	Default = false,
-	Callback = function(xray)
-getgenv().Xray = xray
-uis.InputBegan:Connect(function(inp, processed)
-	
-	
-	if processed then return end
-	
-	
-	if Xray == true then
-		
-		
-		xrayOn = not xrayOn
-		
-		
-		for i, descendant in pairs(workspace:GetDescendants()) do
-				
-			if descendant:IsA("BasePart") then
-				
-				if xrayOn then
-					
-					if not descendant:FindFirstChild("OriginalTransparency") then
-						
-						local originalTransparency = Instance.new("NumberValue")
-						originalTransparency.Name = "OriginalTransparency"
-						originalTransparency.Value = descendant.Transparency
-						originalTransparency.Parent = descendant
-					end
-					
-					descendant.Transparency = 0.5
-					
-				else
-					descendant.Transparency = descendant.OriginalTransparency.Value
-				end
-			end
-		end
-	end
-end)
-	end    
-})
-
-MainTab:AddToggle({
-	Name = "Esp Highlight",
-	Default = false,
-	Callback = function(esp)
-getgenv().Esp = esp
-
-if Esp == true then
-local connections = {}
-
-local Storage = Instance.new("Folder")
-Storage.Parent = CoreGui
-Storage.Name = "Highlight_Storage"
-
-local function Highlight(plr)
-local Highlight = Instance.new("Highlight")
-Highlight.Name = plr.Name
-Highlight.FillColor = FillColor
-Highlight.DepthMode = DepthMode
-Highlight.FillTransparency = FillTransparency
-Highlight.OutlineColor = OutlineColor
-Highlight.OutlineTransparency = 0
-Highlight.Parent = Storage
-
-local plrchar = plr.Character
-if plrchar then
-Highlight.Adornee = plrchar
-end
-
-connections[plr] = plr.CharacterAdded:Connect(function(char)
-Highlight.Adornee = char 
-end)
-end
-
-Players.PlayerAdded:Connect(Highlight)
-for i,v in next, Players:GetPlayers() do
-Highlight(v)
-end
-
-Players.PlayerRemoving:Connect(function(plr)
-local plrname = plr.Name
-if Storage[plrname] then
-Storage[plrname]:Destroy()
-end
-if connections[plr] then
-connections[plr]:Disconnect()
-end
-end)
-end
 	end    
 })
 
@@ -390,17 +260,24 @@ MainTab:AddToggle({
 	Default = false,
 	Callback = function(hit)
 getgenv().Hitbox = hit
+
 game:GetService('RunService').RenderStepped:connect(function()
 if Hitbox == true then
 for i,v in next, game:GetService('Players'):GetPlayers() do
 if v.Name ~= game:GetService('Players').LocalPlayer.Name then
-pcall(function()
+while Hitbox == true do
+wait(.1)
 v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
 v.Character.HumanoidRootPart.Transparency = 0.7
 v.Character.HumanoidRootPart.BrickColor = BrickColor.new("Really blue")
 v.Character.HumanoidRootPart.Material = "Neon"
 v.Character.HumanoidRootPart.CanCollide = false
-end)
+end
+while Hitbox == false do
+_G.HeadSize = 1
+v.Character.HumanoidRootPart.Size = Vector3.new(_G.HeadSize,_G.HeadSize,_G.HeadSize)
+v.Character.HumanoidRootPart.Transparency = 1
+end
 end
 end
 end
@@ -445,15 +322,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifv
 })
 
 MainTab:AddButton({
-        Name = "Fps Booster",
-        Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/FPSBooster.lua"))()
-                      print("Active!")
-          end    
-})
-
-MainTab:AddButton({
-        Name = "AntiFall (All Obby)",
+        Name = "AntiFall",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/zephyr10101/AntiFall/main/Script"))()
                       print("Active!")
@@ -477,44 +346,16 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe/main/obf_11l
 })
 
 MainTab:AddButton({
-        Name = "Wall Climbing",
+        Name = "Wall Climbing (Gui)",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/0Ben1/fe/main/obf_E872F3ky4888TSVdj6Adgi1hSLtM038AyxVpTVw07QA3QUDcI3sxmuD869hYR4id.lua.txt"))()
                       print("Active!")
           end    
 })
 
-local ExecutorTab = Window:MakeTab({
-        Name = "Executors",
-        Icon = "rbxassetid://4483345998",
-        PremiumOnly = false
-})
-
-local ExecutorSection = ExecutorTab:AddSection({
-        Name = "Executor Section"
-})
-
-ExecutorTab:AddTextbox({
-        Name = "Script Here:",
-        Default = "",
-        TextDisappear = false,
-        Callback = function(input)
-        getgenv().ScriptInput = input
-                print(input)
-        end          
-})
-
-ExecutorTab:AddButton({
-        Name = "Load Script",
-        Callback = function()
-getgenv().ScriptInput
-                      print("Active!")
-          end    
-})
-
 local ScriptTab = Window:MakeTab({
-        Name = "Script Hub",
-        Icon = "rbxassetid://4483345998",
+        Name = "Tab Script Hub",
+        Icon = "rbxassetid://7734000129",
         PremiumOnly = false
 })
 
@@ -526,6 +367,14 @@ ScriptTab:AddButton({
         Name = "Monday Morning Misery",
         Callback = function()
 loadstring(game:HttpGet("https://stavratum.github.io/" .. game.PlaceId))()
+                      print("Script Active!")
+          end    
+})
+
+ScriptTab:AddButton({
+        Name = "Funky Friday [Xmas Events]",
+        Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nadir3709/RandomScript/main/FunkyFridayMobile"))()
                       print("Script Active!")
           end    
 })
@@ -549,7 +398,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/KINGHUB01/BlackKing-o
 ScriptTab:AddButton({
         Name = "Pls Donate",
         Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/tzechco/roblox-scripts/main/PLS%20DONATE/autofarm.lua'))()
+loadstring(game:HttpGet("https://scriptblox.com/raw/Universal-Script-unfair-Hub-3936"))()
                       print("Script Active!")
           end    
 })
@@ -573,7 +422,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/PetSimulator9
 ScriptTab:AddButton({
         Name = "Bathroom Battle",
         Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/ToraIsMe/ToraIsMe/main/0BathroomBattle'))()
+loadstring(game:HttpGet('https://raw.githubusercontent.com/tysonware/TysonScripts/main/Bathroom%20Attack'))()
                       print("Script Active!")
           end    
 })
@@ -582,23 +431,13 @@ ScriptTab:AddButton({
         Name = "Stay In The Light",
         Callback = function()
 loadstring(game:HttpGet("https://raw.githubusercontent.com/InfinityMercury/Scripts/main/StayInTheLight/loader.lua",true))()
-KeybindNotifyJ()
                       print("Script Active!")
           end    
 })
 
-ScriptTab:AddBind({
-	Name = "KeyBind J",
-	Default = Enum.KeyCode.J,
-	Hold = false,
-	Callback = function()
-		print("Press J")
-	end    
-})
-
 local BBTab = Window:MakeTab({
-        Name = "Blade Ball Script",
-        Icon = "rbxassetid://4483345998",
+        Name = "Tab Blade Ball",
+        Icon = "rbxassetid://7734056608",
         PremiumOnly = false
 })
 
@@ -607,7 +446,7 @@ local BBSection = BBTab:AddSection({
 })
 
 BBTab:AddButton({
-        Name = "Bedol Hub",
+        Name = "Bedol Hub V2",
         Callback = function()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/nqxlOfc/Loaders/main/Blade_Ball.lua'))()
                       print("Script Active!")
@@ -631,9 +470,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/s-o-a-b/nexus/main/lo
 })
 
 BBTab:AddButton({
-        Name = "Auto Parry (Detect Spam And No Menu)",
+        Name = "Auto Parry (Detect Spam)",
         Callback = function()
-        bucu()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Parry/main/Real"))()
+wait(0.1)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/sirapobsriumang/Auto-Spam-Parry/main/Bladeballnew"))()
                       print("Script Active!")
           end    
 })
@@ -663,8 +504,8 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/Hosvile/Refinement/ma
 })
 
 local BFTab = Window:MakeTab({
-        Name = "Blox Fruit Script",
-        Icon = "rbxassetid://4483345998",
+        Name = "Tab Blox Fruit",
+        Icon = "rbxassetid://7743869054",
         PremiumOnly = false
 })
 
@@ -681,64 +522,16 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/REDzHUB/BloxFruits/ma
 })
 
 BFTab:AddButton({
-        Name = "Master Hub",
+        Name = "Night Hub",
         Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/onepicesenpai/onepicesenpai/main/onichanokaka'))()
-                      print("Script Active!")
-          end    
-})
-
-BFTab:AddButton({
-        Name = "MTriet Hub",
-        Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
-                      print("Script Active!")
-          end    
-})
-
-BFTab:AddButton({
-        Name = "Hoho Hub",
-        Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI'))()
-                      print("Script Active!")
-          end    
-})
-
-BFTab:AddButton({
-        Name = "Satoru Hub",
-        Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/SatoruHub/Main-Script/main/Satoru-Hub"))()
-                      print("Script Active!")
-          end    
-})
-
-BFTab:AddButton({
-        Name = "Fai Fao Hub",
-        Callback = function()
-loadstring(game:HttpGet"https://raw.githubusercontent.com/PNguyen0199/Script/main/Fai-Fao-Ver2.lua")()
-                      print("Script Active!")
-          end    
-})
-
-BFTab:AddButton({
-        Name = "Domadic Hub",
-        Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Domadicoof/Domadicoof/main/Domadichub/NottoGay/Start.ranscript"))()
-                      print("Script Active!")
-          end    
-})
-
-BFTab:AddButton({
-        Name = "Annie Hub",
-        Callback = function()
-loadstring(game:HttpGet('https://raw.githubusercontent.com/1st-Mars/Annie/main/1st.lua'))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/NIGHTHUBONTOP/Main/main/LoaderScript.lua"))()
                       print("Script Active!")
           end    
 })
 
 local CreditTab = Window:MakeTab({
-        Name = "Credit",
-        Icon = "rbxassetid://4483345998",
+        Name = "Tab Credit",
+        Icon = "rbxassetid://7733964370",
         PremiumOnly = false
 })
 
@@ -747,31 +540,3 @@ local CreditOwnerSection = CreditTab:AddSection({
 })
 
 CreditTab:AddLabel("By @MetaHub789(Youtube)")
-
-local CreditHelperSection = CreditTab:AddSection({
-        Name = "Script Helpers"
-})
-
-CreditTab:AddLabel("By @SansYT789(Youtube)")
-CreditTab:AddLabel("By @RoyRedRedVN(Youtube)")
-
-local OtherSection = CreditTab:AddSection({
-        Name = "Other Section"
-})
-
-CreditTab:AddButton({
-        Name = "Rejoin",
-        Callback = function()
-        game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-          end    
-})
-
-CreditTab:AddButton({
-        Name = "Server Small",
-        Callback = function()
-loadstring(game:HttpGet("https://raw.githubusercontent.com/NornalSans789/metascript/main/serversmall"))()
-                      print("Join Server Small...")
-          end    
-})
-
-OrionLib:Init()
